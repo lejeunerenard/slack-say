@@ -1,0 +1,18 @@
+#!/bin/bash
+INPUT=
+while read line
+do INPUT=$INPUT$line
+done
+
+# applescript came in part from:
+# https://github.com/fspinillo/slackfred/blob/master/README.md
+CMD="
+tell application \"Slack\"
+activate
+    tell application \"System Events\"
+        delay .6
+        tell process \"Slack\" to keystroke \"$INPUT\"
+        key code 36
+    end tell
+end tell"
+osascript -e "$CMD"
